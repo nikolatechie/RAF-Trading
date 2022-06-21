@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">rs.raf.jun.nikola_grujic_rn2419</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
 </resources>
