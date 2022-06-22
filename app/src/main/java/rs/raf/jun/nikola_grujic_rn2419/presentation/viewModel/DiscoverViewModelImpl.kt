@@ -1,12 +1,21 @@
 package rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+import rs.raf.jun.nikola_grujic_rn2419.data.model.NewsResponse
+import rs.raf.jun.nikola_grujic_rn2419.data.repository.NewsRepository
+import rs.raf.jun.nikola_grujic_rn2419.data.repository.NewsRepositoryImpl
 
-class DiscoverViewModelImpl : ViewModel() {
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is Discover Fragment"
+class DiscoverViewModelImpl : DiscoverViewModel, ViewModel() {
+    private val newsRepo: NewsRepository = NewsRepositoryImpl()
+    override val newsResponse: MutableLiveData<NewsResponse> = MutableLiveData()
+
+    override fun fetchNews() {
+        viewModelScope.launch {
+            val response = newsRepo.fetchNews()
+            newsResponse.value = response
+        }
     }
-    val text: LiveData<String> = _text
 }
