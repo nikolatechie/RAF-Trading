@@ -12,7 +12,9 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.Theme_DefaultAppTheme)
 
         if (isUserLoggedIn()) {
-            // go to main screen
+            val intent = Intent(this, BottomNavActivity::class.java)
+            startActivity(intent)
+            finish()
         }
         else {
             val intent = Intent(this, LoginActivity::class.java)

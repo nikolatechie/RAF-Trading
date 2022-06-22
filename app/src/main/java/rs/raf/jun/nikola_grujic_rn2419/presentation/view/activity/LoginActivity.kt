@@ -1,5 +1,6 @@
 package rs.raf.jun.nikola_grujic_rn2419.presentation.view.activity
 
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,7 +9,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import rs.raf.jun.nikola_grujic_rn2419.R
-import rs.raf.jun.nikola_grujic_rn2419.presentation.contract.LoginViewModel
+import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.LoginViewModel
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.LoginViewModelImpl
 
 class LoginActivity : AppCompatActivity() {
@@ -45,6 +46,10 @@ class LoginActivity : AppCompatActivity() {
                     editor.putString("username", username)
                     editor.putString("email", email)
                     editor.apply()
+
+                    val intent = Intent(this, BottomNavActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
                 else
                     Toast.makeText(this, "Invalid credentials!", Toast.LENGTH_LONG).show()

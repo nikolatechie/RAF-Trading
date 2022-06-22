@@ -4,7 +4,6 @@ import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import rs.raf.jun.nikola_grujic_rn2419.data.repository.login.LoginRepository
 import rs.raf.jun.nikola_grujic_rn2419.data.repository.login.LoginRepositoryImpl
-import rs.raf.jun.nikola_grujic_rn2419.presentation.contract.LoginViewModel
 
 class LoginViewModelImpl : ViewModel(), LoginViewModel {
     private val loginRepo: LoginRepository = LoginRepositoryImpl()

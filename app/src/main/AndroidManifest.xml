@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DefaultAppTheme">
         <activity
+            android:name=".presentation.view.activity.BottomNavActivity"
+            android:exported="false"
+            android:label="@string/title_activity_bottom_nav" />
+        <activity
             android:name=".presentation.view.activity.LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login"
