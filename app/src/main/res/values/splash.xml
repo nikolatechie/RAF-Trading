@@ -3,6 +3,6 @@
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/white</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/logo</item>
-        <item name="postSplashScreenTheme">@style/Theme.Rsrafjunnikola_grujic_rn2419</item>
+        <item name="postSplashScreenTheme">@style/Theme.DefaultAppTheme</item>
     </style>
 </resources>

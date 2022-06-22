@@ -10,12 +10,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Rsrafjunnikola_grujic_rn2419">
+        android:theme="@style/Theme.DefaultAppTheme">
         <activity
             android:name=".presentation.view.activity.LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login"
-            android:theme="@style/Theme.Rsrafjunnikola_grujic_rn2419" />
+            android:theme="@style/Theme.DefaultAppTheme" />
         <activity
             android:name=".presentation.view.activity.MainActivity"
             android:exported="true"

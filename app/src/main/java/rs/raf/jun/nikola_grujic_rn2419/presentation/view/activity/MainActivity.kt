@@ -9,10 +9,10 @@ import rs.raf.jun.nikola_grujic_rn2419.R
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.Theme_Rsrafjunnikola_grujic_rn2419)
+        setTheme(R.style.Theme_DefaultAppTheme)
 
         if (isUserLoggedIn()) {
-            // idi na glavni ekran
+            // go to main screen
         }
         else {
             val intent = Intent(this, LoginActivity::class.java)
@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         val sp: SharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE)
         val username: String? = sp.getString("username", null)
         val email: String? = sp.getString("email", null)
-        val password: String? = sp.getString("password", null)
-        return username != null && email != null && password != null
+        return username != null && email != null
     }
 }
