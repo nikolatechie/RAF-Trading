@@ -7,4 +7,5 @@ interface DiscoverViewModel {
     val newsResponse: MutableLiveData<List<News>>
 
     fun fetchNews()
+    fun fetchStocks()
 }

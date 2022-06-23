@@ -18,4 +18,8 @@ class DiscoverViewModelImpl : DiscoverViewModel, ViewModel() {
             newsResponse.value = response
         }
     }
+
+    override fun fetchStocks() {
+        TODO("Not yet implemented")
+    }
 }

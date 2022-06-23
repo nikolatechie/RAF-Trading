@@ -9,4 +9,6 @@
     <string name="title_discover">Discover</string>
     <string name="title_portfolio">Portfolio</string>
     <string name="title_profile">Profile</string>
+    <string name="popular_stocks">Popular stocks</string>
+    <string name="news">News</string>
 </resources>
