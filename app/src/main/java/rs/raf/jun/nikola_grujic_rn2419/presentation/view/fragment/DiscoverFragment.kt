@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import rs.raf.jun.nikola_grujic_rn2419.databinding.FragmentDiscoverBinding
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.DiscoverViewModel
@@ -28,22 +29,11 @@ class DiscoverFragment : Fragment() {
 
         viewModel.fetchNews()
         viewModel.newsResponse.observe(viewLifecycleOwner) { response ->
-            if (response == null)
-                Log.d("RESPONSE", "Jeste null")
-            else {
-                Log.d("RESPONSE", "DOBAR")
-
-                if (response.data == null)
-                    Log.d("DATA", "Null je")
-                else {
-                    Log.d("DATA", "Dobaaarrr")
-
-                    if (response.data.newsItems == null)
-                        Log.d("NIZ", "Null")
-                    else
-                        Log.d("NIZ", response.data.newsItems.toString())
-                }
+            if (response != null && response.isNotEmpty()) {
+                Log.d("RESPONSE", response.toString())
             }
+            else Toast.makeText(context, "Request to the server failed!",
+                Toast.LENGTH_LONG).show()
         }
 
         return root
