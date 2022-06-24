@@ -11,4 +11,8 @@
     <string name="title_profile">Profile</string>
     <string name="popular_stocks">Popular stocks</string>
     <string name="news">News</string>
+    <string name="email">Email:</string>
+    <string name="profile_image">Profile image</string>
+    <string name="username">Username:</string>
+    <string name="log_out">Log out</string>
 </resources>
