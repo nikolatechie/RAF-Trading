@@ -13,10 +13,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
-        app:layout_constraintEnd_toEndOf="@+id/recyclerView"
-        app:layout_constraintStart_toStartOf="@+id/recyclerView"
-        app:layout_constraintTop_toTopOf="@+id/recyclerView" />
+        app:layout_constraintBottom_toBottomOf="@+id/stocksRecView"
+        app:layout_constraintEnd_toEndOf="@+id/stocksRecView"
+        app:layout_constraintStart_toStartOf="@+id/stocksRecView"
+        app:layout_constraintTop_toTopOf="@+id/stocksRecView" />
 
     <TextView
         android:id="@+id/popularStocksTv"
@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/newsTv" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/stocksRecView"
         android:layout_width="330dp"
         android:layout_height="180dp"
         android:layout_marginStart="40dp"

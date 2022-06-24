@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import rs.raf.jun.nikola_grujic_rn2419.R
 import rs.raf.jun.nikola_grujic_rn2419.data.model.News
+import rs.raf.jun.nikola_grujic_rn2419.data.model.Quote
 import rs.raf.jun.nikola_grujic_rn2419.databinding.FragmentDiscoverBinding
 import rs.raf.jun.nikola_grujic_rn2419.presentation.view.adapter.NewsRecyclerAdapter
+import rs.raf.jun.nikola_grujic_rn2419.presentation.view.adapter.StocksRecyclerAdapter
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.DiscoverViewModel
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.DiscoverViewModelImpl
 
@@ -56,7 +58,6 @@ class DiscoverFragment : Fragment() {
 
             if (response != null && response.isNotEmpty()) {
                 //Log.d("RESPONSE NEWS", response.toString())
-
                 val list = response as ArrayList<News>
                 val recView: RecyclerView = binding.root.findViewById(R.id.newsRecView)
                 val recAdapter = NewsRecyclerAdapter(list, requireActivity())
@@ -79,6 +80,15 @@ class DiscoverFragment : Fragment() {
 
             if (response != null && response.isNotEmpty()) {
                 //Log.d("RESPONSE STOCKS", response.toString())
+                val list = response as ArrayList<Quote>
+                val recView: RecyclerView = binding.root.findViewById(R.id.stocksRecView)
+                val recAdapter = StocksRecyclerAdapter(list)
+                val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(
+                    requireContext().applicationContext
+                )
+                recView.layoutManager = layoutManager
+                recView.itemAnimator = DefaultItemAnimator()
+                recView.adapter = recAdapter
             }
             else Toast.makeText(context, "Request to the server failed!",
                 Toast.LENGTH_SHORT).show()

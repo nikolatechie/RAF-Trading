@@ -24,7 +24,7 @@ class NewsRecyclerAdapter(private var list: ArrayList<News>,
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var dateTv: TextView = view.findViewById(R.id.dateTv)
         var titleTv: TextView = view.findViewById(R.id.titleTv)
-        var card: LinearLayout = view.findViewById(R.id.card)
+        var card: LinearLayout = view.findViewById(R.id.cardNews)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
