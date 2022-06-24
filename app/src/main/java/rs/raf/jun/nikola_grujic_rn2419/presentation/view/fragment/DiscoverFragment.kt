@@ -55,7 +55,7 @@ class DiscoverFragment : Fragment() {
             hideNewsProgressBar()
 
             if (response != null && response.isNotEmpty()) {
-                Log.d("RESPONSE NEWS", response.toString())
+                //Log.d("RESPONSE NEWS", response.toString())
 
                 val list = response as ArrayList<News>
                 val recView: RecyclerView = binding.root.findViewById(R.id.newsRecView)
@@ -78,7 +78,7 @@ class DiscoverFragment : Fragment() {
             hideStocksProgressBar()
 
             if (response != null && response.isNotEmpty()) {
-                Log.d("RESPONSE STOCKS", response.toString())
+                //Log.d("RESPONSE STOCKS", response.toString())
             }
             else Toast.makeText(context, "Request to the server failed!",
                 Toast.LENGTH_SHORT).show()
