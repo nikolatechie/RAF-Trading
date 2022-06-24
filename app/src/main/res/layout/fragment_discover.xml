@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.view.fragment.DiscoverFragment">
+    tools:context=".presentation.view.fragment.DiscoverFragment"
+    android:scrollbars="vertical">
 
     <ProgressBar
         android:id="@+id/stocksProgress"
@@ -41,7 +42,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/newsRecView"
         android:layout_width="330dp"
-        android:layout_height="140dp"
+        android:layout_height="200dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="12dp"
         android:orientation="horizontal"

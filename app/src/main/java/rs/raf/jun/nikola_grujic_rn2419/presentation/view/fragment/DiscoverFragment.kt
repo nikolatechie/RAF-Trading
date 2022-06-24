@@ -59,7 +59,7 @@ class DiscoverFragment : Fragment() {
 
                 val list = response as ArrayList<News>
                 val recView: RecyclerView = binding.root.findViewById(R.id.newsRecView)
-                val recAdapter = NewsRecyclerAdapter(list)
+                val recAdapter = NewsRecyclerAdapter(list, requireActivity())
                 val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(
                     requireContext().applicationContext, LinearLayoutManager.HORIZONTAL, false
                 )
