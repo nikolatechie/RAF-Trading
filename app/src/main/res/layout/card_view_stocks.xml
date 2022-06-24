@@ -11,7 +11,6 @@
         android:id="@+id/symbolLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="Stock symbol:"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +21,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/symbolLeft"
         app:layout_constraintTop_toTopOf="parent" />
@@ -44,4 +42,14 @@
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stockName" />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/stockChart"
+        android:layout_width="310dp"
+        android:layout_height="133dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lastPrice" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
