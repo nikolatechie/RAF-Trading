@@ -10,7 +10,7 @@ class NewsRepositoryImpl: NewsRepository {
         // remote data source
         return try {
             Retrofit
-                .getInstance("https://b311eca0-15ae-40e9-9185-c6d4da7ae2c7.mock.pstmn.io")
+                .getInstance("https://testapi.io")
                 .create(NewsRemoteDs::class.java)
                 .fetchNews()
                 .data.newsItems
