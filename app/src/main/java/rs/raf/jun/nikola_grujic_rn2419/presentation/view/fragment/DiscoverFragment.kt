@@ -36,7 +36,15 @@ class DiscoverFragment : Fragment() {
 
     private fun init() {
         showProgressBars()
+        fetchData()
+    }
 
+    private fun fetchData() {
+        fetchNews()
+        fetchStocks()
+    }
+
+    private fun fetchNews() {
         viewModel.fetchNews()
         viewModel.newsResponse.observe(viewLifecycleOwner) { response ->
             hideNewsProgressBar()
@@ -47,7 +55,9 @@ class DiscoverFragment : Fragment() {
             else Toast.makeText(context, "Request to the server failed!",
                 Toast.LENGTH_SHORT).show()
         }
+    }
 
+    private fun fetchStocks() {
         viewModel.fetchStocks()
         viewModel.indexResponse.observe(viewLifecycleOwner) { response ->
             hideStocksProgressBar()
