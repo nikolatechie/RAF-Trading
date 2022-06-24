@@ -42,24 +42,22 @@ class DiscoverFragment : Fragment() {
             hideNewsProgressBar()
 
             if (response != null && response.isNotEmpty()) {
-                Log.d("RESPONSE", response.toString())
+                Log.d("RESPONSE NEWS", response.toString())
             }
             else Toast.makeText(context, "Request to the server failed!",
                 Toast.LENGTH_SHORT).show()
         }
 
-        /*
         viewModel.fetchStocks()
-        viewModel.stocksResponse.observe(viewLifecycleOwner) { response ->
+        viewModel.indexResponse.observe(viewLifecycleOwner) { response ->
             hideStocksProgressBar()
 
             if (response != null && response.isNotEmpty()) {
-                Log.d("RESPONSE", response.toString())
+                Log.d("RESPONSE STOCKS", response.toString())
             }
             else Toast.makeText(context, "Request to the server failed!",
                 Toast.LENGTH_SHORT).show()
         }
-        */
     }
 
     private fun showProgressBars() {
