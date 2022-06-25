@@ -29,4 +29,5 @@
     <string name="mkt_cap">MKT CAP</string>
     <string name="eps">EPS</string>
     <string name="alpha">ALPHA</string>
+    <string name="currency">Currency</string>
 </resources>
