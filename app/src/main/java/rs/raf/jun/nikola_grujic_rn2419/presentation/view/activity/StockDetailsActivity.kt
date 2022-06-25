@@ -6,7 +6,13 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import rs.raf.jun.nikola_grujic_rn2419.R
+import rs.raf.jun.nikola_grujic_rn2419.data.model.Bar
 import rs.raf.jun.nikola_grujic_rn2419.data.model.Stock
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.DetailsViewModel
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.DetailsViewModelImpl
@@ -44,8 +50,12 @@ class StockDetailsActivity : AppCompatActivity() {
                 //Log.d("RESPONSE DETAILS", response.instrumentId)
                 initUi(response)
             }
-            else Toast.makeText(this, "Request to the server failed!",
-                Toast.LENGTH_SHORT).show()
+            else {
+                Toast.makeText(this, "Request to the server failed!",
+                    Toast.LENGTH_SHORT).show()
+
+                finish()
+            }
         }
     }
 
@@ -82,7 +92,19 @@ class StockDetailsActivity : AppCompatActivity() {
     }
 
     private fun initChart(stock: Stock) {
-        // TODO: create chart
+        val chart: LineChart = findViewById(R.id.stockChart)
+        val entries = ArrayList<Entry>()
+
+        for (bar: Bar in stock.chart.bars)
+            entries.add(Entry(entries.size.toFloat(), (bar.price).toFloat()))
+
+        val set = LineDataSet(entries, "Stock")
+
+        val dataSet = ArrayList<ILineDataSet>()
+        dataSet.add(set)
+        val data = LineData(dataSet)
+        chart.data = data
+        chart.invalidate()
     }
 
     private fun showProgressBar() {
