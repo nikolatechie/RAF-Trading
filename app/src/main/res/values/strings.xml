@@ -15,4 +15,18 @@
     <string name="profile_image">Profile image</string>
     <string name="username">Username:</string>
     <string name="log_out">Log out</string>
+    <string name="current_value">Current value</string>
+    <string name="symbol">Symbol</string>
+    <string name="buy">Buy</string>
+    <string name="sell">Sell</string>
+    <string name="open">OPEN</string>
+    <string name="bid">BID</string>
+    <string name="close">CLOSE</string>
+    <string name="ebit">EBIT</string>
+    <string name="sharp">SHARP</string>
+    <string name="ask">ASK</string>
+    <string name="beta">BETA</string>
+    <string name="mkt_cap">MKT CAP</string>
+    <string name="eps">EPS</string>
+    <string name="alpha">ALPHA</string>
 </resources>

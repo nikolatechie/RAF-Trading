@@ -2,6 +2,7 @@ package rs.raf.jun.nikola_grujic_rn2419.presentation.view.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import rs.raf.jun.nikola_grujic_rn2419.R
 
 class StockDetailsActivity : AppCompatActivity() {
@@ -15,5 +16,11 @@ class StockDetailsActivity : AppCompatActivity() {
     private fun init() {
         val symbol = intent.getStringExtra("symbol")
         supportActionBar?.title = "Stock details - $symbol"
+
+        // delete when the API starts working, and replace the current one
+        if (symbol != "T") {
+            Toast.makeText(this, "Symbol must be T", Toast.LENGTH_SHORT).show()
+            finish()
+        }
     }
 }
