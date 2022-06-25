@@ -1,10 +1,13 @@
 package rs.raf.jun.nikola_grujic_rn2419.presentation.view.adapter
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
@@ -14,8 +17,10 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import rs.raf.jun.nikola_grujic_rn2419.R
 import rs.raf.jun.nikola_grujic_rn2419.data.model.Bar
 import rs.raf.jun.nikola_grujic_rn2419.data.model.Quote
+import rs.raf.jun.nikola_grujic_rn2419.presentation.view.activity.StockDetailsActivity
 
-class StocksRecyclerAdapter(private var list: ArrayList<Quote>) :
+class StocksRecyclerAdapter(private var list: ArrayList<Quote>,
+    private var activity: Activity) :
     RecyclerView.Adapter<StocksRecyclerAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -23,6 +28,7 @@ class StocksRecyclerAdapter(private var list: ArrayList<Quote>) :
         var name: TextView = view.findViewById(R.id.stockName)
         var lastPrice: TextView = view.findViewById(R.id.lastPrice)
         var chart: LineChart = view.findViewById(R.id.stockChart)
+        var card: ConstraintLayout = view.findViewById(R.id.cardStocks)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -39,6 +45,7 @@ class StocksRecyclerAdapter(private var list: ArrayList<Quote>) :
         holder.lastPrice.text =
             "Last price: " + list[position].last.toString() + list[position].currency
 
+        // chart
         val entries = ArrayList<Entry>()
 
         for (bar: Bar in list[position].chart.bars)
@@ -60,6 +67,13 @@ class StocksRecyclerAdapter(private var list: ArrayList<Quote>) :
         val data = LineData(dataSet)
         holder.chart.data = data
         holder.chart.invalidate()
+
+        // stock details
+        holder.card.setOnClickListener {
+            val intent = Intent(activity, StockDetailsActivity::class.java)
+            intent.putExtra("symbol", list[position].symbol)
+            activity.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {

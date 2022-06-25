@@ -82,7 +82,7 @@ class DiscoverFragment : Fragment() {
                 //Log.d("RESPONSE STOCKS", response.toString())
                 val list = response as ArrayList<Quote>
                 val recView: RecyclerView = binding.root.findViewById(R.id.stocksRecView)
-                val recAdapter = StocksRecyclerAdapter(list)
+                val recAdapter = StocksRecyclerAdapter(list, requireActivity())
                 val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(
                     requireContext().applicationContext
                 )

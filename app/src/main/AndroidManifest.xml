@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DefaultAppTheme">
         <activity
+            android:name=".presentation.view.activity.StockDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.view.activity.BottomNavActivity"
             android:exported="false"
             android:label="@string/title_activity_bottom_nav" />
@@ -26,6 +29,7 @@
             android:theme="@style/Theme.App.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
