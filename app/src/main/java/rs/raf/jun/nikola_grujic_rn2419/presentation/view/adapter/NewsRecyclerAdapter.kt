@@ -16,7 +16,6 @@ import rs.raf.jun.nikola_grujic_rn2419.R
 import rs.raf.jun.nikola_grujic_rn2419.data.model.News
 import rs.raf.jun.nikola_grujic_rn2419.module.GlideApp
 
-// sa Android Developers
 class NewsRecyclerAdapter(private var list: ArrayList<News>,
     private var activity: Activity) :
     RecyclerView.Adapter<NewsRecyclerAdapter.MyViewHolder>() {

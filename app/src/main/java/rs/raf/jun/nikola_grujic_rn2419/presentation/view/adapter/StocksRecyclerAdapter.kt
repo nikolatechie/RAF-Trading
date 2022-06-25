@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -41,7 +40,6 @@ class StocksRecyclerAdapter(private var list: ArrayList<Quote>) :
             "Last price: " + list[position].last.toString() + list[position].currency
 
         val entries = ArrayList<Entry>()
-        val colors = ArrayList<Int>()
 
         for (bar: Bar in list[position].chart.bars)
             entries.add(Entry(entries.size.toFloat(), (bar.price).toFloat()))
