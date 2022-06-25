@@ -1,8 +1,10 @@
 package rs.raf.jun.nikola_grujic_rn2419.presentation.view.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -88,7 +90,31 @@ class StockDetailsActivity : AppCompatActivity() {
         eps.text = "EPS: " + stock.metrics.eps
         ebit.text = "EBIT: " + stock.metrics.ebit
 
+        initListeners(stock)
         initChart(stock)
+    }
+
+    private fun initListeners(stock: Stock) {
+        val buyBtn: Button = findViewById(R.id.buyBtn)
+        val sellBtn: Button = findViewById(R.id.sellBtn)
+
+        buyBtn.setOnClickListener {
+            val intent = Intent(this, BuyActivity::class.java)
+            intent.putExtra("id", stock.instrumentId)
+            intent.putExtra("name", stock.name)
+            intent.putExtra("symbol", stock.symbol)
+            intent.putExtra("last", stock.last)
+            startActivity(intent)
+        }
+
+        sellBtn.setOnClickListener {
+            val intent = Intent(this, SellActivity::class.java)
+            intent.putExtra("id", stock.instrumentId)
+            intent.putExtra("name", stock.name)
+            intent.putExtra("symbol", stock.symbol)
+            intent.putExtra("last", stock.last)
+            startActivity(intent)
+        }
     }
 
     private fun initChart(stock: Stock) {

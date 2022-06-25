@@ -30,4 +30,6 @@
     <string name="eps">EPS</string>
     <string name="alpha">ALPHA</string>
     <string name="currency">Currency</string>
+    <string name="buy_shares">Buy shares</string>
+    <string name="sell_all_shares">Sell all shares</string>
 </resources>

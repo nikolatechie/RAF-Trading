@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DefaultAppTheme">
         <activity
+            android:name=".presentation.view.activity.SellActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.view.activity.BuyActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.view.activity.StockDetailsActivity"
             android:exported="false" />
         <activity
