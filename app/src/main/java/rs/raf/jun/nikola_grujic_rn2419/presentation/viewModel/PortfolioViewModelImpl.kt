@@ -17,6 +17,7 @@ class PortfolioViewModelImpl(application: Application) : PortfolioViewModel, Vie
     private val accRepo: AccountRepository = AccountRepositoryImpl(application)
     private val portRepo: PortfolioRepository = PortfolioRepositoryImpl(application)
     override val accountResponse: MutableLiveData<AccountInfo?> = MutableLiveData()
+    override val portfolioResponse: MutableLiveData<List<PortfolioHistory>?> = MutableLiveData()
 
     override fun getAccountInfo(username: String) {
         viewModelScope.launch {
@@ -25,8 +26,11 @@ class PortfolioViewModelImpl(application: Application) : PortfolioViewModel, Vie
         }
     }
 
-    override fun getPortfolioHistory(username: String): List<PortfolioHistory>? {
-        return portRepo.getPortfolioHistory(username)
+    override fun getPortfolioHistory(username: String) {
+        viewModelScope.launch {
+            val response = portRepo.getPortfolioHistory(username)
+            portfolioResponse.value = response
+        }
     }
 
     override fun getBoughtStocks(username: String): List<BoughtStock>? {
