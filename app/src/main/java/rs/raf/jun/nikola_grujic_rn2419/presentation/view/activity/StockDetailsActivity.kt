@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -20,7 +21,7 @@ import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.DetailsViewModel
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.DetailsViewModelImpl
 
 class StockDetailsActivity : AppCompatActivity() {
-    private val viewModel: DetailsViewModel = DetailsViewModelImpl()
+    private lateinit var viewModel: DetailsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +32,7 @@ class StockDetailsActivity : AppCompatActivity() {
 
     private fun init() {
         showProgressBar()
+        viewModel = ViewModelProvider(this)[DetailsViewModelImpl::class.java]
         val symbol = intent.getStringExtra("symbol") ?: return
         supportActionBar?.title = "Stock details - $symbol"
 

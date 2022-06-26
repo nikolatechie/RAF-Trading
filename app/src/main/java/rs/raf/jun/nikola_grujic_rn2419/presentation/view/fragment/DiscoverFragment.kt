@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +22,7 @@ import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.DiscoverViewModel
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.DiscoverViewModelImpl
 
 class DiscoverFragment : Fragment() {
-    private val viewModel: DiscoverViewModel = DiscoverViewModelImpl()
+    private lateinit var viewModel: DiscoverViewModel
     private var _binding: FragmentDiscoverBinding? = null
 
     // This property is only valid between onCreateView and
@@ -43,6 +44,7 @@ class DiscoverFragment : Fragment() {
 
     private fun init() {
         showProgressBars()
+        viewModel = ViewModelProvider(this)[DiscoverViewModelImpl::class.java]
         fetchData()
     }
 
