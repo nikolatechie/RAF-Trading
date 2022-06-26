@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 data class AccountInfo (
     @PrimaryKey
     val username: String,
-    val balance: Double,
-    val portfolio: Double
+    var balance: Double,
+    var portfolio: Double
 )
