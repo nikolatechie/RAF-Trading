@@ -4,10 +4,10 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
-import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.ViewModelProvider
 import rs.raf.jun.nikola_grujic_rn2419.R
 import rs.raf.jun.nikola_grujic_rn2419.data.model.AccountInfo
+import rs.raf.jun.nikola_grujic_rn2419.data.model.PortfolioHistory
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.BuyViewModel
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.BuyViewModelFactory
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.BuyViewModelImpl
@@ -82,6 +82,7 @@ class BuyActivity : AppCompatActivity() {
         }
     }
 
+    // BUYING - first option
     private fun buyByShares(numOfShares: Int, accInfo: AccountInfo) {
         if (numOfShares < 1) {
             Toast.makeText(this, "Number must be greater than zero", Toast.LENGTH_SHORT).show()
@@ -100,9 +101,11 @@ class BuyActivity : AppCompatActivity() {
         accInfo.portfolio += deduct
 
         viewModel.addAccountInfo(accInfo)
+        viewModel.addPortfolioHistory(PortfolioHistory(0, accInfo.username, accInfo.portfolio))
         finish()
     }
 
+    // BUYING - second option
     private fun buyByMoney(money: Double, accInfo: AccountInfo) {
         if (money < 1 || money > accInfo.balance) {
             Toast.makeText(this, "Invalid amount", Toast.LENGTH_SHORT).show()
@@ -122,6 +125,7 @@ class BuyActivity : AppCompatActivity() {
         accInfo.portfolio += deduct
 
         viewModel.addAccountInfo(accInfo)
+        viewModel.addPortfolioHistory(PortfolioHistory(0, accInfo.username, accInfo.portfolio))
         finish()
     }
 
