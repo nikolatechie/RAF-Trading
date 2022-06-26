@@ -44,11 +44,13 @@ class PortfolioFragment : Fragment() {
 
         val balanceTv: TextView = binding.root.findViewById(R.id.balanceTv)
         val portfolioTv: TextView = binding.root.findViewById(R.id.portfolioTv)
-        val accountInfo = viewModel.getAccountInfo(getUsername())
 
-        if (accountInfo != null) {
-            balanceTv.text = "Account balance: " + accountInfo.balance.toString()
-            portfolioTv.text = "Portfolio value: " + accountInfo.portfolio.toString()
+        viewModel.getAccountInfo(getUsername())
+        viewModel.accountResponse.observe(viewLifecycleOwner) { accountInfo ->
+            if (accountInfo != null) {
+                balanceTv.text = "Account balance: " + accountInfo.balance.toString()
+                portfolioTv.text = "Portfolio value: " + accountInfo.portfolio.toString()
+            }
         }
     }
 
