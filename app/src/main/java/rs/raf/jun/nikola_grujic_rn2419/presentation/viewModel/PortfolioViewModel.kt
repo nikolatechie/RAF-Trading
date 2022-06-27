@@ -8,8 +8,9 @@ import rs.raf.jun.nikola_grujic_rn2419.data.model.PortfolioHistory
 interface PortfolioViewModel {
     val accountResponse: MutableLiveData<AccountInfo?>
     val portfolioResponse: MutableLiveData<List<PortfolioHistory>?>
+    val stocksResponse: MutableLiveData<List<BoughtStock>?>
 
     fun getAccountInfo(username: String)
     fun getPortfolioHistory(username: String)
-    fun getBoughtStocks(username: String): List<BoughtStock>?
+    fun getBoughtStocks(username: String)
 }

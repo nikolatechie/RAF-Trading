@@ -61,6 +61,10 @@ class PortfolioFragment : Fragment() {
                 balanceTv.text = "Account balance: " + accountInfo.balance.toString()
                 portfolioTv.text = "Portfolio value: " + accountInfo.portfolio.toString()
             }
+            else {
+                balanceTv.text = "Account balance: 10000.0"
+                portfolioTv.text = "Portfolio value: 0.0"
+            }
         }
 
         // chart
@@ -81,6 +85,14 @@ class PortfolioFragment : Fragment() {
                 val data = LineData(dataSet)
                 chart.data = data
                 chart.invalidate()
+            }
+        }
+
+        // bought stocks
+        viewModel.getBoughtStocks(username)
+        viewModel.stocksResponse.observe(viewLifecycleOwner) { response ->
+            if (response != null) {
+                Log.d("asd9k ", response.toString())
             }
         }
     }

@@ -7,6 +7,7 @@ import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import rs.raf.jun.nikola_grujic_rn2419.R
 import rs.raf.jun.nikola_grujic_rn2419.data.model.AccountInfo
+import rs.raf.jun.nikola_grujic_rn2419.data.model.BoughtStock
 import rs.raf.jun.nikola_grujic_rn2419.data.model.PortfolioHistory
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.BuyViewModel
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.BuyViewModelFactory
@@ -102,6 +103,7 @@ class BuyActivity : AppCompatActivity() {
 
         viewModel.addAccountInfo(accInfo)
         viewModel.addPortfolioHistory(PortfolioHistory(0, accInfo.username, accInfo.portfolio))
+        addBoughtStock(accInfo.username, numOfShares)
         finish()
     }
 
@@ -126,7 +128,25 @@ class BuyActivity : AppCompatActivity() {
 
         viewModel.addAccountInfo(accInfo)
         viewModel.addPortfolioHistory(PortfolioHistory(0, accInfo.username, accInfo.portfolio))
+        addBoughtStock(accInfo.username, amount)
         finish()
+    }
+
+    private fun addBoughtStock(username: String, amount: Int) {
+        val symbol = intent.getStringExtra("symbol")!!
+        val boughtStock = viewModel.getBoughtStock(username, symbol)
+
+        if (boughtStock != null) {
+            boughtStock.amount += amount
+            viewModel.addBoughtStock(boughtStock)
+            return
+        }
+
+        val stock = BoughtStock(0, username, symbol,
+            intent.getStringExtra("name")!!, intent.getDoubleExtra("last", 0.toDouble()),
+            amount)
+
+        viewModel.addBoughtStock(stock)
     }
 
     private fun getUsername(): String {

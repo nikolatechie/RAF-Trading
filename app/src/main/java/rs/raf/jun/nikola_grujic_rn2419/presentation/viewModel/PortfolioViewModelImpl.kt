@@ -8,16 +8,15 @@ import kotlinx.coroutines.launch
 import rs.raf.jun.nikola_grujic_rn2419.data.model.AccountInfo
 import rs.raf.jun.nikola_grujic_rn2419.data.model.BoughtStock
 import rs.raf.jun.nikola_grujic_rn2419.data.model.PortfolioHistory
-import rs.raf.jun.nikola_grujic_rn2419.data.repository.AccountRepository
-import rs.raf.jun.nikola_grujic_rn2419.data.repository.AccountRepositoryImpl
-import rs.raf.jun.nikola_grujic_rn2419.data.repository.PortfolioRepository
-import rs.raf.jun.nikola_grujic_rn2419.data.repository.PortfolioRepositoryImpl
+import rs.raf.jun.nikola_grujic_rn2419.data.repository.*
 
 class PortfolioViewModelImpl(application: Application) : PortfolioViewModel, ViewModel() {
     private val accRepo: AccountRepository = AccountRepositoryImpl(application)
     private val portRepo: PortfolioRepository = PortfolioRepositoryImpl(application)
+    private val stockRepo: StocksRepository = StocksRepositoryImpl(application)
     override val accountResponse: MutableLiveData<AccountInfo?> = MutableLiveData()
     override val portfolioResponse: MutableLiveData<List<PortfolioHistory>?> = MutableLiveData()
+    override val stocksResponse: MutableLiveData<List<BoughtStock>?> = MutableLiveData()
 
     override fun getAccountInfo(username: String) {
         viewModelScope.launch {
@@ -33,8 +32,11 @@ class PortfolioViewModelImpl(application: Application) : PortfolioViewModel, Vie
         }
     }
 
-    override fun getBoughtStocks(username: String): List<BoughtStock>? {
-        TODO("Not yet implemented")
+    override fun getBoughtStocks(username: String) {
+        viewModelScope.launch {
+            val response = stockRepo.getBoughtStocks(username)
+            stocksResponse.value = response
+        }
     }
 
 }
