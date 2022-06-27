@@ -28,7 +28,7 @@
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/portfolioChart"
         android:layout_width="330dp"
-        android:layout_height="200dp"
+        android:layout_height="180dp"
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -50,6 +50,7 @@
         android:id="@+id/portfolioRecView"
         android:layout_width="330dp"
         android:layout_height="220dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
