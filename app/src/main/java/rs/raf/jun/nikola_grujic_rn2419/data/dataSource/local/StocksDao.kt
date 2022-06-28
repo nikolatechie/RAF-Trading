@@ -16,4 +16,7 @@ interface StocksDao {
 
     @Query("SELECT * FROM stocks WHERE username = :username")
     fun getBoughtStocks(username: String): List<BoughtStock>?
+
+    @Query("DELETE FROM stocks WHERE username = :username AND amount = 0")
+    fun deleteStock(username: String)
 }

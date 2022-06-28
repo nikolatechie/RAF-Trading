@@ -2,6 +2,7 @@ package rs.raf.jun.nikola_grujic_rn2419.presentation.view.fragment
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,12 +62,12 @@ class PortfolioFragment : Fragment() {
         viewModel.getAccountInfo(username)
         viewModel.accountResponse.observe(viewLifecycleOwner) { accountInfo ->
             if (accountInfo != null) {
-                balanceTv.text = "Account balance: " + accountInfo.balance.toString()
-                portfolioTv.text = "Portfolio value: " + accountInfo.portfolio.toString()
+                balanceTv.text = "Account balance: " + roundToTwoDecimals(accountInfo.balance.toString())
+                portfolioTv.text = "Portfolio value: " + roundToTwoDecimals(accountInfo.portfolio.toString())
             }
             else {
-                balanceTv.text = "Account balance: 10000.0"
-                portfolioTv.text = "Portfolio value: 0.0"
+                balanceTv.text = "Account balance: 10000.00"
+                portfolioTv.text = "Portfolio value: 0.00"
             }
         }
 
@@ -112,6 +113,29 @@ class PortfolioFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun roundToTwoDecimals(num: String): String {
+        var ans = ""
+
+        for (i in num.indices) {
+            if (num[i] == '.') {
+                ans += "."
+
+                try {
+                    ans += num[i+1]
+                    ans += num[i+2]
+                }
+                catch (e: Exception) {
+                    ans += "00"
+                }
+
+                break
+            }
+            else ans += num[i]
+        }
+
+        return ans
     }
 
     private fun getUsername(): String {

@@ -33,4 +33,5 @@
     <string name="buy_shares">Buy shares</string>
     <string name="sell_all_shares">Sell all shares</string>
     <string name="enter_a_cash_amount">Enter a cash amount</string>
+    <string name="enter_number_of_shares">Enter number of shares</string>
 </resources>

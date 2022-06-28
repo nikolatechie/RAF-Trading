@@ -19,4 +19,8 @@ class StocksRepositoryImpl(application: Application): StocksRepository {
     override fun getBoughtStocks(username: String): List<BoughtStock>? {
         return stocksDao.getBoughtStocks(username)
     }
+
+    override fun deleteStock(username: String) {
+        stocksDao.deleteStock(username)
+    }
 }

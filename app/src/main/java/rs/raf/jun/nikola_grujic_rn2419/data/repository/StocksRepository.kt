@@ -6,4 +6,5 @@ interface StocksRepository {
     fun addStock(stock: BoughtStock)
     fun getBoughtStock(username: String, symbol: String): BoughtStock?
     fun getBoughtStocks(username: String): List<BoughtStock>?
+    fun deleteStock(username: String)
 }

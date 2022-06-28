@@ -7,7 +7,7 @@ import rs.raf.jun.nikola_grujic_rn2419.data.model.BoughtStock
 import rs.raf.jun.nikola_grujic_rn2419.data.model.PortfolioHistory
 import rs.raf.jun.nikola_grujic_rn2419.data.repository.*
 
-class BuyViewModelImpl(application: Application): BuyViewModel, ViewModel() {
+class BuySellViewModelImpl(application: Application): BuySellViewModel, ViewModel() {
     private val accRepo: AccountRepository = AccountRepositoryImpl(application)
     private val portRepo: PortfolioRepository = PortfolioRepositoryImpl(application)
     private val stockRepo: StocksRepository = StocksRepositoryImpl(application)
@@ -38,5 +38,9 @@ class BuyViewModelImpl(application: Application): BuyViewModel, ViewModel() {
 
     override fun getBoughtStocks(username: String): List<BoughtStock>? {
         return stockRepo.getBoughtStocks(username)
+    }
+
+    override fun deleteStock(username: String) {
+        stockRepo.deleteStock(username)
     }
 }

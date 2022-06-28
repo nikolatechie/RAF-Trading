@@ -9,13 +9,13 @@ import rs.raf.jun.nikola_grujic_rn2419.R
 import rs.raf.jun.nikola_grujic_rn2419.data.model.AccountInfo
 import rs.raf.jun.nikola_grujic_rn2419.data.model.BoughtStock
 import rs.raf.jun.nikola_grujic_rn2419.data.model.PortfolioHistory
-import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.BuyViewModel
-import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.BuyViewModelFactory
-import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.BuyViewModelImpl
+import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.BuySellViewModel
+import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.BuySellViewModelFactory
+import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.BuySellViewModelImpl
 import java.lang.Exception
 
 class BuyActivity : AppCompatActivity() {
-    private lateinit var viewModel: BuyViewModel
+    private lateinit var viewModel: BuySellViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +28,9 @@ class BuyActivity : AppCompatActivity() {
         supportActionBar?.title = "Buy"
 
         // view model
-        val viewModelFactory = BuyViewModelFactory(application)
+        val viewModelFactory = BuySellViewModelFactory(application)
         viewModel = ViewModelProvider(this, viewModelFactory)[
-                BuyViewModelImpl::class.java
+                BuySellViewModelImpl::class.java
         ]
 
         initUi()
@@ -60,7 +60,7 @@ class BuyActivity : AppCompatActivity() {
             viewModel.addAccountInfo(accInfo)
         }
 
-        accBalance.text = "Account balance: " + accInfo.balance.toString()
+        accBalance.text = "Account balance: " + roundToTwoDecimals(accInfo.balance.toString())
 
         val buyBtn: Button = findViewById(R.id.buyStockBtn)
         buyBtn.setOnClickListener {
@@ -150,6 +150,29 @@ class BuyActivity : AppCompatActivity() {
             amount, change)
 
         viewModel.addBoughtStock(stock)
+    }
+
+    private fun roundToTwoDecimals(num: String): String {
+        var ans = ""
+
+        for (i in num.indices) {
+            if (num[i] == '.') {
+                ans += "."
+
+                try {
+                    ans += num[i+1]
+                    ans += num[i+2]
+                }
+                catch (e: Exception) {
+                    ans += "00"
+                }
+
+                break
+            }
+            else ans += num[i]
+        }
+
+        return ans
     }
 
     private fun getUsername(): String {

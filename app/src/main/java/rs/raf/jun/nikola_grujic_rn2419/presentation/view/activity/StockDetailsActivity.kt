@@ -1,9 +1,11 @@
 package rs.raf.jun.nikola_grujic_rn2419.presentation.view.activity
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
@@ -19,10 +21,16 @@ import rs.raf.jun.nikola_grujic_rn2419.R
 import rs.raf.jun.nikola_grujic_rn2419.data.model.Bar
 import rs.raf.jun.nikola_grujic_rn2419.data.model.Stock
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.DetailsViewModel
+import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.DetailsViewModelFactory
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.DetailsViewModelImpl
 
 class StockDetailsActivity : AppCompatActivity() {
     private lateinit var viewModel: DetailsViewModel
+
+    override fun onResume() {
+        super.onResume()
+        init()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +41,11 @@ class StockDetailsActivity : AppCompatActivity() {
 
     private fun init() {
         showProgressBar()
-        viewModel = ViewModelProvider(this)[DetailsViewModelImpl::class.java]
+
+        // view model
+        val viewModelFactory = DetailsViewModelFactory(application)
+        viewModel = ViewModelProvider(this, viewModelFactory)[DetailsViewModelImpl::class.java]
+
         val symbol = intent.getStringExtra("symbol") ?: return
         supportActionBar?.title = "Stock details - $symbol"
 
@@ -112,15 +124,22 @@ class StockDetailsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        sellBtn.setOnClickListener {
-            val intent = Intent(this, SellActivity::class.java)
-            intent.putExtra("id", stock.instrumentId)
-            intent.putExtra("name", stock.name)
-            intent.putExtra("symbol", stock.symbol)
-            intent.putExtra("last", stock.last)
-            intent.putExtra("change", change)
-            startActivity(intent)
+        val boughtStock = viewModel.getBoughtStock(getUsername(), stock.symbol)
+
+        if (boughtStock != null) {
+            sellBtn.visibility = View.VISIBLE
+
+            sellBtn.setOnClickListener {
+                val intent = Intent(this, SellActivity::class.java)
+                intent.putExtra("id", stock.instrumentId)
+                intent.putExtra("name", stock.name)
+                intent.putExtra("symbol", stock.symbol)
+                intent.putExtra("last", stock.last)
+                intent.putExtra("change", change)
+                startActivity(intent)
+            }
         }
+        else sellBtn.visibility = View.GONE
     }
 
     private fun initChart(stock: Stock, change: Double) {
@@ -156,5 +175,13 @@ class StockDetailsActivity : AppCompatActivity() {
     private fun hideProgressBar() {
         val progress: ProgressBar = findViewById(R.id.detailsProgBar)
         progress.visibility = View.GONE
+    }
+
+    private fun getUsername(): String {
+        val sp: SharedPreferences = getSharedPreferences(
+            "userInfo",
+            AppCompatActivity.MODE_PRIVATE
+        )
+        return sp.getString("username", "")!!
     }
 }

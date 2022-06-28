@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".presentation.view.activity.SellActivity">
 
+    <EditText
+        android:id="@+id/sellEditText"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="@string/enter_number_of_shares"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sellToggle" />
+
     <TextView
         android:id="@+id/sellNameTv"
         android:layout_width="wrap_content"
@@ -36,6 +49,15 @@
         android:backgroundTint="@color/blue"
         android:text="@string/sell"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/numOfSharesTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        app:layout_constraintBottom_toTopOf="@+id/sellStockBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
