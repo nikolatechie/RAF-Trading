@@ -1,6 +1,7 @@
 package rs.raf.jun.nikola_grujic_rn2419.presentation.view.activity
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -92,11 +93,12 @@ class StockDetailsActivity : AppCompatActivity() {
         eps.text = "EPS: " + stock.metrics.eps
         ebit.text = "EBIT: " + stock.metrics.ebit
 
-        initListeners(stock)
-        initChart(stock)
+        val change: Double = intent.getDoubleExtra("change", 0.toDouble())
+        initListeners(stock, change)
+        initChart(stock, change)
     }
 
-    private fun initListeners(stock: Stock) {
+    private fun initListeners(stock: Stock, change: Double) {
         val buyBtn: Button = findViewById(R.id.buyBtn)
         val sellBtn: Button = findViewById(R.id.sellBtn)
 
@@ -106,6 +108,7 @@ class StockDetailsActivity : AppCompatActivity() {
             intent.putExtra("name", stock.name)
             intent.putExtra("symbol", stock.symbol)
             intent.putExtra("last", stock.last)
+            intent.putExtra("change", change)
             startActivity(intent)
         }
 
@@ -115,11 +118,12 @@ class StockDetailsActivity : AppCompatActivity() {
             intent.putExtra("name", stock.name)
             intent.putExtra("symbol", stock.symbol)
             intent.putExtra("last", stock.last)
+            intent.putExtra("change", change)
             startActivity(intent)
         }
     }
 
-    private fun initChart(stock: Stock) {
+    private fun initChart(stock: Stock, change: Double) {
         val chart: LineChart = findViewById(R.id.stockChart)
         val entries = ArrayList<Entry>()
 
@@ -127,6 +131,15 @@ class StockDetailsActivity : AppCompatActivity() {
             entries.add(Entry(entries.size.toFloat(), (bar.price).toFloat()))
 
         val set = LineDataSet(entries, "Stock")
+
+        if (change < 0f) {
+            set.color = Color.RED
+            set.setCircleColor(Color.RED)
+        }
+        else {
+            set.color = Color.GREEN
+            set.setCircleColor(Color.GREEN)
+        }
 
         val dataSet = ArrayList<ILineDataSet>()
         dataSet.add(set)

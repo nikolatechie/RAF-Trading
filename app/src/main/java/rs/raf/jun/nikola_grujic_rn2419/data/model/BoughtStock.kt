@@ -11,5 +11,6 @@ data class BoughtStock (
     val symbol: String,
     val name: String,
     val price: Double,
-    var amount: Int
+    var amount: Int,
+    val change: Double
 )

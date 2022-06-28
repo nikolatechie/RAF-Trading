@@ -104,6 +104,7 @@ class BuyActivity : AppCompatActivity() {
         viewModel.addAccountInfo(accInfo)
         viewModel.addPortfolioHistory(PortfolioHistory(0, accInfo.username, accInfo.portfolio))
         addBoughtStock(accInfo.username, numOfShares)
+        Toast.makeText(this, "Bought successfully!", Toast.LENGTH_SHORT).show()
         finish()
     }
 
@@ -129,10 +130,12 @@ class BuyActivity : AppCompatActivity() {
         viewModel.addAccountInfo(accInfo)
         viewModel.addPortfolioHistory(PortfolioHistory(0, accInfo.username, accInfo.portfolio))
         addBoughtStock(accInfo.username, amount)
+        Toast.makeText(this, "Bought successfully!", Toast.LENGTH_SHORT).show()
         finish()
     }
 
     private fun addBoughtStock(username: String, amount: Int) {
+        val change: Double = intent.getDoubleExtra("change", 0.toDouble())
         val symbol = intent.getStringExtra("symbol")!!
         val boughtStock = viewModel.getBoughtStock(username, symbol)
 
@@ -144,7 +147,7 @@ class BuyActivity : AppCompatActivity() {
 
         val stock = BoughtStock(0, username, symbol,
             intent.getStringExtra("name")!!, intent.getDoubleExtra("last", 0.toDouble()),
-            amount)
+            amount, change)
 
         viewModel.addBoughtStock(stock)
     }

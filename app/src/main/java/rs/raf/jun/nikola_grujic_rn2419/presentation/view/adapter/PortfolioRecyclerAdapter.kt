@@ -49,9 +49,12 @@ class PortfolioRecyclerAdapter(private var list: ArrayList<BoughtStock>,
         holder.lastPrice.text =
             "Last price: " + list[position].price.toString()
 
+        var change: Double = 0.toDouble()
+
         for (stock: BoughtStock in list) {
             if (stock.symbol == list[position].symbol) {
                 holder.amount.text = "Amount: " + stock.amount
+                change = stock.change
                 break
             }
         }
@@ -63,6 +66,16 @@ class PortfolioRecyclerAdapter(private var list: ArrayList<BoughtStock>,
             entries.add(Entry(entries.size.toFloat(), (bar.price).toFloat()))
 
         val set = LineDataSet(entries, "Stock")
+
+        if (change < 0f) {
+            set.color = Color.RED
+            set.setCircleColor(Color.RED)
+        }
+        else {
+            set.color = Color.GREEN
+            set.setCircleColor(Color.GREEN)
+        }
+
         val dataSet = ArrayList<ILineDataSet>()
         dataSet.add(set)
         val data = LineData(dataSet)
@@ -73,6 +86,7 @@ class PortfolioRecyclerAdapter(private var list: ArrayList<BoughtStock>,
         holder.card.setOnClickListener {
             val intent = Intent(activity, StockDetailsActivity::class.java)
             intent.putExtra("symbol", list[position].symbol)
+            intent.putExtra("change", change)
             activity.startActivity(intent)
         }
     }

@@ -72,6 +72,7 @@ class StocksRecyclerAdapter(private var list: ArrayList<Quote>,
         holder.card.setOnClickListener {
             val intent = Intent(activity, StockDetailsActivity::class.java)
             intent.putExtra("symbol", list[position].symbol)
+            intent.putExtra("change", list[position].changeFromPreviousClose)
             activity.startActivity(intent)
         }
     }
