@@ -53,31 +53,38 @@ class BuyActivity : AppCompatActivity() {
 
         val accBalance: TextView = findViewById(R.id.accBalanceTv)
         val username = getUsername()
-        var accInfo = viewModel.getAccountInfo(username)
 
-        if (accInfo == null) {
-            accInfo = AccountInfo(username, 10000.toDouble(), 0.toDouble())
-            viewModel.addAccountInfo(accInfo)
-        }
+        viewModel.getAccountInfo(username)
+        viewModel.accResponse.observe(this) { response ->
+            var accInfo = response
 
-        accBalance.text = "Account balance: " + roundToTwoDecimals(accInfo.balance.toString())
+            if (accInfo == null) {
+                accInfo = AccountInfo(username, 10000.toDouble(), 0.toDouble())
+                viewModel.addAccountInfo(accInfo)
+            }
 
-        val buyBtn: Button = findViewById(R.id.buyStockBtn)
-        buyBtn.setOnClickListener {
-            val editText: EditText = findViewById(R.id.buyEditText)
+            accBalance.text = "Account balance: " + roundToTwoDecimals(accInfo.balance.toString())
 
-            if (editText.text.toString().isEmpty())
-                Toast.makeText(this, "The value must not be empty", Toast.LENGTH_SHORT).show()
-            else {
-                try {
-                    if (toggle.isChecked)
-                        buyByShares(editText.text.toString().toInt(), accInfo)
-                    else
-                        buyByMoney(editText.text.toString().toDouble(), accInfo)
-                }
-                catch (e: Exception) {
-                    e.printStackTrace()
-                    Toast.makeText(this, "The entered value must be a number", Toast.LENGTH_SHORT).show()
+            val buyBtn: Button = findViewById(R.id.buyStockBtn)
+            buyBtn.setOnClickListener {
+                val editText: EditText = findViewById(R.id.buyEditText)
+
+                if (editText.text.toString().isEmpty())
+                    Toast.makeText(this, "The value must not be empty", Toast.LENGTH_SHORT).show()
+                else {
+                    try {
+                        if (toggle.isChecked)
+                            buyByShares(editText.text.toString().toInt(), accInfo)
+                        else
+                            buyByMoney(editText.text.toString().toDouble(), accInfo)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        Toast.makeText(
+                            this,
+                            "The entered value must be a number",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
         }
@@ -137,19 +144,23 @@ class BuyActivity : AppCompatActivity() {
     private fun addBoughtStock(username: String, amount: Int) {
         val change: Double = intent.getDoubleExtra("change", 0.toDouble())
         val symbol = intent.getStringExtra("symbol")!!
-        val boughtStock = viewModel.getBoughtStock(username, symbol)
 
-        if (boughtStock != null) {
-            boughtStock.amount += amount
-            viewModel.addBoughtStock(boughtStock)
-            return
+        viewModel.getBoughtStock(username, symbol)
+        viewModel.stockResponse.observe(this) { boughtStock ->
+            if (boughtStock != null) {
+                boughtStock.amount += amount
+                viewModel.addBoughtStock(boughtStock)
+            }
+            else {
+                val stock = BoughtStock(
+                    0, username, symbol,
+                    intent.getStringExtra("name")!!, intent.getDoubleExtra("last", 0.toDouble()),
+                    amount, change
+                )
+
+                viewModel.addBoughtStock(stock)
+            }
         }
-
-        val stock = BoughtStock(0, username, symbol,
-            intent.getStringExtra("name")!!, intent.getDoubleExtra("last", 0.toDouble()),
-            amount, change)
-
-        viewModel.addBoughtStock(stock)
     }
 
     private fun roundToTwoDecimals(num: String): String {

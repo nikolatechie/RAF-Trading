@@ -16,6 +16,7 @@ class DetailsViewModelImpl(application: Application) : DetailsViewModel, ViewMod
     private val detailsRepo: DetailsRepository = DetailsRepositoryImpl()
     private val stocksRepo: StocksRepository = StocksRepositoryImpl(application)
     override val stock: MutableLiveData<Stock> = MutableLiveData()
+    override val boughtStock: MutableLiveData<BoughtStock?> = MutableLiveData()
 
     override fun fetchStock(symbol: String) {
         viewModelScope.launch {
@@ -24,7 +25,10 @@ class DetailsViewModelImpl(application: Application) : DetailsViewModel, ViewMod
         }
     }
 
-    override fun getBoughtStock(username: String, symbol: String): BoughtStock? {
-        return stocksRepo.getBoughtStock(username, symbol)
+    override fun getBoughtStock(username: String, symbol: String) {
+        viewModelScope.launch {
+            val response = stocksRepo.getBoughtStock(username, symbol)
+            boughtStock.value = response
+        }
     }
 }

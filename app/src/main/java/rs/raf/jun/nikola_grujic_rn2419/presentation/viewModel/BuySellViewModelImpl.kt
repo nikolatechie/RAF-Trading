@@ -1,7 +1,10 @@
 package rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel
 
 import android.app.Application
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import rs.raf.jun.nikola_grujic_rn2419.data.model.AccountInfo
 import rs.raf.jun.nikola_grujic_rn2419.data.model.BoughtStock
 import rs.raf.jun.nikola_grujic_rn2419.data.model.PortfolioHistory
@@ -11,36 +14,60 @@ class BuySellViewModelImpl(application: Application): BuySellViewModel, ViewMode
     private val accRepo: AccountRepository = AccountRepositoryImpl(application)
     private val portRepo: PortfolioRepository = PortfolioRepositoryImpl(application)
     private val stockRepo: StocksRepository = StocksRepositoryImpl(application)
+    override val accResponse: MutableLiveData<AccountInfo?> = MutableLiveData()
+    override val portResponse: MutableLiveData<List<PortfolioHistory>?> = MutableLiveData()
+    override val stockResponse: MutableLiveData<BoughtStock?> = MutableLiveData()
+    override val stocksResponse: MutableLiveData<List<BoughtStock>?> = MutableLiveData()
 
     override fun addAccountInfo(accountInfo: AccountInfo) {
-        accRepo.addAccountInfo(accountInfo)
+        viewModelScope.launch {
+            accRepo.addAccountInfo(accountInfo)
+        }
     }
 
-    override fun getAccountInfo(username: String): AccountInfo? {
-        return accRepo.getAccountInfo(username)
+    override fun getAccountInfo(username: String) {
+        viewModelScope.launch {
+            val response = accRepo.getAccountInfo(username)
+            accResponse.value = response
+        }
     }
 
     override fun addPortfolioHistory(portfolio: PortfolioHistory) {
-        portRepo.addPortfolioHistory(portfolio)
+        viewModelScope.launch {
+            portRepo.addPortfolioHistory(portfolio)
+        }
     }
 
-    override fun getPortfolioHistory(username: String): List<PortfolioHistory>? {
-        return portRepo.getPortfolioHistory(username)
+    override fun getPortfolioHistory(username: String) {
+        viewModelScope.launch {
+            val response = portRepo.getPortfolioHistory(username)
+            portResponse.value = response
+        }
     }
 
     override fun addBoughtStock(stock: BoughtStock) {
-        stockRepo.addStock(stock)
+        viewModelScope.launch {
+            stockRepo.addStock(stock)
+        }
     }
 
-    override fun getBoughtStock(username: String, symbol: String): BoughtStock? {
-        return stockRepo.getBoughtStock(username, symbol)
+    override fun getBoughtStock(username: String, symbol: String) {
+        viewModelScope.launch {
+            val response = stockRepo.getBoughtStock(username, symbol)
+            stockResponse.value = response
+        }
     }
 
-    override fun getBoughtStocks(username: String): List<BoughtStock>? {
-        return stockRepo.getBoughtStocks(username)
+    override fun getBoughtStocks(username: String) {
+        viewModelScope.launch {
+            val response = stockRepo.getBoughtStocks(username)
+            stocksResponse.value = response
+        }
     }
 
     override fun deleteStock(username: String) {
-        stockRepo.deleteStock(username)
+        viewModelScope.launch {
+            stockRepo.deleteStock(username)
+        }
     }
 }

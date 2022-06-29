@@ -5,8 +5,6 @@ import rs.raf.jun.nikola_grujic_rn2419.data.model.AccountInfo
 import rs.raf.jun.nikola_grujic_rn2419.data.model.BoughtStock
 import rs.raf.jun.nikola_grujic_rn2419.data.model.PortfolioHistory
 import rs.raf.jun.nikola_grujic_rn2419.data.model.Stock
-import rs.raf.jun.nikola_grujic_rn2419.data.repository.DetailsRepository
-import rs.raf.jun.nikola_grujic_rn2419.data.repository.DetailsRepositoryImpl
 
 interface PortfolioViewModel {
     val accountResponse: MutableLiveData<AccountInfo?>

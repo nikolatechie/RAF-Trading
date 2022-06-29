@@ -124,22 +124,22 @@ class StockDetailsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val boughtStock = viewModel.getBoughtStock(getUsername(), stock.symbol)
+        viewModel.getBoughtStock(getUsername(), stock.symbol)
+        viewModel.boughtStock.observe(this) { boughtStock ->
+            if (boughtStock != null) {
+                sellBtn.visibility = View.VISIBLE
 
-        if (boughtStock != null) {
-            sellBtn.visibility = View.VISIBLE
-
-            sellBtn.setOnClickListener {
-                val intent = Intent(this, SellActivity::class.java)
-                intent.putExtra("id", stock.instrumentId)
-                intent.putExtra("name", stock.name)
-                intent.putExtra("symbol", stock.symbol)
-                intent.putExtra("last", stock.last)
-                intent.putExtra("change", change)
-                startActivity(intent)
-            }
+                sellBtn.setOnClickListener {
+                    val intent = Intent(this, SellActivity::class.java)
+                    intent.putExtra("id", stock.instrumentId)
+                    intent.putExtra("name", stock.name)
+                    intent.putExtra("symbol", stock.symbol)
+                    intent.putExtra("last", stock.last)
+                    intent.putExtra("change", change)
+                    startActivity(intent)
+                }
+            } else sellBtn.visibility = View.GONE
         }
-        else sellBtn.visibility = View.GONE
     }
 
     private fun initChart(stock: Stock, change: Double) {
