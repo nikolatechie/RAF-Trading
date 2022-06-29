@@ -9,7 +9,8 @@ import rs.raf.jun.nikola_grujic_rn2419.data.model.BoughtStock
 import rs.raf.jun.nikola_grujic_rn2419.data.model.PortfolioHistory
 
 @Database(entities = [AccountInfo::class, PortfolioHistory::class, BoughtStock::class],
-    version = 1, exportSchema = false)
+    version = 1, exportSchema = false
+)
 abstract class RafDatabase: RoomDatabase() {
     abstract fun accountDao(): AccountDao
     abstract fun portfolioDao(): PortfolioDao

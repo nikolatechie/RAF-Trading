@@ -25,6 +25,7 @@ import rs.raf.jun.nikola_grujic_rn2419.presentation.view.adapter.PortfolioRecycl
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.PortfolioViewModel
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.PortfolioViewModelFactory
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.PortfolioViewModelImpl
+import java.lang.Exception
 
 class PortfolioFragment : Fragment() {
     private lateinit var viewModel: PortfolioViewModel
@@ -118,12 +119,10 @@ class PortfolioFragment : Fragment() {
             if (num[i] == '.') {
                 ans += "."
 
-                try {
-                    ans += num[i+1]
-                    ans += num[i+2]
-                }
-                catch (e: Exception) {
-                    ans += "00"
+                ans += try {
+                    (num[i+1].toString() + num[i+2])
+                } catch (e: Exception) {
+                    "00"
                 }
 
                 break

@@ -170,12 +170,10 @@ class BuyActivity : AppCompatActivity() {
             if (num[i] == '.') {
                 ans += "."
 
-                try {
-                    ans += num[i+1]
-                    ans += num[i+2]
-                }
-                catch (e: Exception) {
-                    ans += "00"
+                ans += try {
+                    (num[i+1].toString() + num[i+2])
+                } catch (e: Exception) {
+                    "00"
                 }
 
                 break

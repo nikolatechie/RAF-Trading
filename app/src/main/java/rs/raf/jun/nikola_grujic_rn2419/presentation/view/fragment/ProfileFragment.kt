@@ -17,8 +17,6 @@ import rs.raf.jun.nikola_grujic_rn2419.presentation.view.activity.LoginActivity
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -30,7 +28,6 @@ class ProfileFragment : Fragment() {
         val root: View = binding.root
 
         init()
-
         return root
     }
 
@@ -52,8 +49,8 @@ class ProfileFragment : Fragment() {
             editor.apply()
 
             val intent = Intent(activity, LoginActivity::class.java)
-            startActivity(intent)
             requireActivity().finish()
+            startActivity(intent)
         }
     }
 

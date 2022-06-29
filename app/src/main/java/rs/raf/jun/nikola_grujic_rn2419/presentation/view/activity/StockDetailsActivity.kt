@@ -49,7 +49,7 @@ class StockDetailsActivity : AppCompatActivity() {
         val symbol = intent.getStringExtra("symbol") ?: return
         supportActionBar?.title = "Stock details - $symbol"
 
-        // delete when the API starts working, and replace the current one
+        // ne dozvoljava drugim simbolima posto samo ima podatke o T
         if (symbol != "T") {
             Toast.makeText(this, "Symbol must be T", Toast.LENGTH_SHORT).show()
             finish()
