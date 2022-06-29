@@ -87,6 +87,8 @@ class PortfolioFragment : Fragment() {
         // bought stocks
         viewModel.getBoughtStocks(username)
         viewModel.stocksResponse.observe(viewLifecycleOwner) { response1 ->
+            val emptyTv: TextView = binding.root.findViewById(R.id.emptyTv)
+
             if (response1 != null) {
                 // fetch data for chart
                 // treba fetchovati podatke za svaki kupljeni
@@ -94,6 +96,12 @@ class PortfolioFragment : Fragment() {
                 viewModel.quoteResponse.observe(viewLifecycleOwner) { response2 ->
                     val chartData = response2.chart
                     val list = response1 as ArrayList<BoughtStock>
+
+                    if (list.isEmpty())
+                        emptyTv.visibility = View.VISIBLE
+                    else
+                        emptyTv.visibility = View.GONE
+
                     val recView: RecyclerView = binding.root.findViewById(R.id.portfolioRecView)
                     val recAdapter = PortfolioRecyclerAdapter(list, chartData, requireActivity())
                     val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(
@@ -104,6 +112,7 @@ class PortfolioFragment : Fragment() {
                     recView.adapter = recAdapter
                 }
             }
+            else emptyTv.visibility = View.VISIBLE
         }
     }
 
