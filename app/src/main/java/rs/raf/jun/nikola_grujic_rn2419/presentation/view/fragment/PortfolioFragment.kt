@@ -17,18 +17,18 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import rs.raf.jun.nikola_grujic_rn2419.R
 import rs.raf.jun.nikola_grujic_rn2419.data.model.BoughtStock
 import rs.raf.jun.nikola_grujic_rn2419.data.model.PortfolioHistory
 import rs.raf.jun.nikola_grujic_rn2419.databinding.FragmentPortfolioBinding
 import rs.raf.jun.nikola_grujic_rn2419.presentation.view.adapter.PortfolioRecyclerAdapter
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.PortfolioViewModel
-import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.PortfolioViewModelFactory
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.PortfolioViewModelImpl
 import java.lang.Exception
 
 class PortfolioFragment : Fragment() {
-    private lateinit var viewModel: PortfolioViewModel
+    private val viewModel: PortfolioViewModel by viewModel<PortfolioViewModelImpl>()
     private var _binding: FragmentPortfolioBinding? = null
 
     private val binding get() = _binding!!
@@ -46,11 +46,6 @@ class PortfolioFragment : Fragment() {
     }
 
     private fun init() {
-        val viewModelFactory = PortfolioViewModelFactory(requireActivity().application)
-        viewModel = ViewModelProvider(this, viewModelFactory)[
-                PortfolioViewModelImpl::class.java
-        ]
-
         val balanceTv: TextView = binding.root.findViewById(R.id.balanceTv)
         val portfolioTv: TextView = binding.root.findViewById(R.id.portfolioTv)
         val username = getUsername()

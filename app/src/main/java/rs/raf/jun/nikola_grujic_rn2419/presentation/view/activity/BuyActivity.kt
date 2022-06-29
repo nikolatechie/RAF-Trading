@@ -5,17 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
 import androidx.lifecycle.ViewModelProvider
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import rs.raf.jun.nikola_grujic_rn2419.R
 import rs.raf.jun.nikola_grujic_rn2419.data.model.AccountInfo
 import rs.raf.jun.nikola_grujic_rn2419.data.model.BoughtStock
 import rs.raf.jun.nikola_grujic_rn2419.data.model.PortfolioHistory
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.BuySellViewModel
-import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.BuySellViewModelFactory
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.BuySellViewModelImpl
 import java.lang.Exception
 
 class BuyActivity : AppCompatActivity() {
-    private lateinit var viewModel: BuySellViewModel
+    private val viewModel: BuySellViewModel by viewModel<BuySellViewModelImpl>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,13 +26,6 @@ class BuyActivity : AppCompatActivity() {
 
     private fun init() {
         supportActionBar?.title = "Buy"
-
-        // view model
-        val viewModelFactory = BuySellViewModelFactory(application)
-        viewModel = ViewModelProvider(this, viewModelFactory)[
-                BuySellViewModelImpl::class.java
-        ]
-
         initUi()
     }
 

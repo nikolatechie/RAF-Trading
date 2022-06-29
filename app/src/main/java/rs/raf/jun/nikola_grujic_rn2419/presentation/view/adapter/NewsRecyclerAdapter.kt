@@ -54,7 +54,7 @@ class NewsRecyclerAdapter(private var list: ArrayList<News>,
                 }
 
                 override fun onLoadCleared(placeholder: Drawable?) {
-                    TODO("Not yet implemented")
+                    //TODO("Not yet implemented")
                 }
             }
         )

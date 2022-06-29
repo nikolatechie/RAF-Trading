@@ -8,12 +8,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import rs.raf.jun.nikola_grujic_rn2419.R
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.LoginViewModel
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.LoginViewModelImpl
 
 class LoginActivity : AppCompatActivity() {
-    private lateinit var viewModel: LoginViewModel
+    private val viewModel: LoginViewModel by viewModel<LoginViewModelImpl>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +24,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        viewModel = ViewModelProvider(this)[LoginViewModelImpl::class.java]
-
         val loginBtn: Button = findViewById(R.id.loginBtn)
         loginBtn.setOnClickListener {
             val username = findViewById<EditText>(R.id.username).text.toString()

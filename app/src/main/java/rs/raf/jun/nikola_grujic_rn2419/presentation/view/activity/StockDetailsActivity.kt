@@ -5,27 +5,25 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import rs.raf.jun.nikola_grujic_rn2419.R
 import rs.raf.jun.nikola_grujic_rn2419.data.model.Bar
 import rs.raf.jun.nikola_grujic_rn2419.data.model.Stock
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.DetailsViewModel
-import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.DetailsViewModelFactory
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.DetailsViewModelImpl
 
 class StockDetailsActivity : AppCompatActivity() {
-    private lateinit var viewModel: DetailsViewModel
+    private val viewModel: DetailsViewModel by viewModel<DetailsViewModelImpl>()
 
     override fun onResume() {
         super.onResume()
@@ -41,11 +39,6 @@ class StockDetailsActivity : AppCompatActivity() {
 
     private fun init() {
         showProgressBar()
-
-        // view model
-        val viewModelFactory = DetailsViewModelFactory(application)
-        viewModel = ViewModelProvider(this, viewModelFactory)[DetailsViewModelImpl::class.java]
-
         val symbol = intent.getStringExtra("symbol") ?: return
         supportActionBar?.title = "Stock details - $symbol"
 

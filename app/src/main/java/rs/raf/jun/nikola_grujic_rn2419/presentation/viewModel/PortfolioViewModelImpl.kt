@@ -1,21 +1,22 @@
 package rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel
 
-import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import rs.raf.jun.nikola_grujic_rn2419.data.model.AccountInfo
 import rs.raf.jun.nikola_grujic_rn2419.data.model.BoughtStock
 import rs.raf.jun.nikola_grujic_rn2419.data.model.PortfolioHistory
 import rs.raf.jun.nikola_grujic_rn2419.data.model.Stock
 import rs.raf.jun.nikola_grujic_rn2419.data.repository.*
 
-class PortfolioViewModelImpl(application: Application) : PortfolioViewModel, ViewModel() {
-    private val accRepo: AccountRepository = AccountRepositoryImpl(application)
-    private val portRepo: PortfolioRepository = PortfolioRepositoryImpl(application)
-    private val stockRepo: StocksRepository = StocksRepositoryImpl(application)
-    private val quoteRepo: DetailsRepository = DetailsRepositoryImpl()
+class PortfolioViewModelImpl : PortfolioViewModel, ViewModel(), KoinComponent {
+    private val accRepo: AccountRepository by inject()
+    private val portRepo: PortfolioRepository by inject()
+    private val stockRepo: StocksRepository by inject()
+    private val quoteRepo: DetailsRepository by inject()
     override val accountResponse: MutableLiveData<AccountInfo?> = MutableLiveData()
     override val portfolioResponse: MutableLiveData<List<PortfolioHistory>?> = MutableLiveData()
     override val stocksResponse: MutableLiveData<List<BoughtStock>?> = MutableLiveData()

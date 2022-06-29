@@ -15,7 +15,7 @@ class DetailsRepositoryImpl: DetailsRepository {
             Retrofit
                 .getInstance("https://testapi.io")
                 .create(QuoteRemoteDs::class.java)
-                .fetchStock() // ovde bi isao symbol kao query param
+                .fetchStock() // ovde bi isao symbol za query param
                 .data
         } catch (e: Exception) {
             Log.d("ERROR", "Retrofit - Details")

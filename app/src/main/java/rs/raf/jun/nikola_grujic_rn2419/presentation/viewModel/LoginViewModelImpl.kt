@@ -2,11 +2,12 @@ package rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel
 
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import rs.raf.jun.nikola_grujic_rn2419.data.repository.LoginRepository
-import rs.raf.jun.nikola_grujic_rn2419.data.repository.LoginRepositoryImpl
 
-class LoginViewModelImpl : ViewModel(), LoginViewModel {
-    private val loginRepo: LoginRepository = LoginRepositoryImpl()
+class LoginViewModelImpl : ViewModel(), LoginViewModel, KoinComponent {
+    private val loginRepo: LoginRepository by inject()
 
     override fun validateInput(username: String, email: String, password: String): String? {
         return if (username.isEmpty() || email.isEmpty() || password.isEmpty())

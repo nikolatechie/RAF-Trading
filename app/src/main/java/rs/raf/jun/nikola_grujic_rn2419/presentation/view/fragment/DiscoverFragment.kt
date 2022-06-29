@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import rs.raf.jun.nikola_grujic_rn2419.R
 import rs.raf.jun.nikola_grujic_rn2419.data.model.News
 import rs.raf.jun.nikola_grujic_rn2419.data.model.Quote
@@ -21,7 +22,7 @@ import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.DiscoverViewModel
 import rs.raf.jun.nikola_grujic_rn2419.presentation.viewModel.DiscoverViewModelImpl
 
 class DiscoverFragment : Fragment() {
-    private lateinit var viewModel: DiscoverViewModel
+    private val viewModel: DiscoverViewModel by viewModel<DiscoverViewModelImpl>()
     private var _binding: FragmentDiscoverBinding? = null
 
     private val binding get() = _binding!!
@@ -39,7 +40,6 @@ class DiscoverFragment : Fragment() {
 
     private fun init() {
         showProgressBars()
-        viewModel = ViewModelProvider(this)[DiscoverViewModelImpl::class.java]
         fetchData()
     }
 
