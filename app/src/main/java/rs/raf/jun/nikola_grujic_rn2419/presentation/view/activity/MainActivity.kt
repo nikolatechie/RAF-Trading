@@ -4,12 +4,12 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import rs.raf.jun.nikola_grujic_rn2419.R
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
-        setTheme(R.style.Theme_DefaultAppTheme)
 
         if (isUserLoggedIn()) {
             val intent = Intent(this, BottomNavActivity::class.java)
